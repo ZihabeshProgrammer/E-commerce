@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block aimeos_header %}{% endblock %}
+        <title>{% block title %}seid test shop{% endblock %}</title>
+        <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% block aimeos_styles %}{% endblock %}
+    </head>
+    <body>
+        <div class="navbar navbar-static" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+          </div>
+          <div id="this">
+            {% block aimeos_head %}{% endblock %}
+            <a class="nav-link" href="{{ path_for('aimeos_shop_list') }}">Home <span class="sr-only">(current)</span></a>
+            {% if auth.check %}
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ auth.user.username }}</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">              
+                         <a class="dropdown-item" href="#">Profile</a>
+                         <a class="dropdown-item" href="{{ path_for('auth.password.change') }}">Change password</a>
+                         <a class="dropdown-item" href="{{ path_for('auth.signout') }}">Sign out</a>
+                    </div>
+            </li>  
+            {% else %}   
+            <a class="nav-link" href="{{ path_for('auth.signup') }}">Sign up</a>  
+            <a class="nav-link " href="{{ path_for('auth.signin') }}">Sign in</a>
+            {% endif %}
+          </div>
+
+        </div>
+        <div class="col-xs-12">
+
+
+        <main role="main" class="container">
+            
+                  <div class="starter-template">
+                     {% include 'flash.twig' %}  
+                      {% block content %}{% endblock %}
+                      {% block aimeos_nav %}{% endblock %}
+                      {% block aimeos_stage %}{% endblock %}
+                      {% block aimeos_body %}{% endblock %}
+                      {% block aimeos_aside %}{% endblock %}
+                    </div>
+            
+            </main>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% block aimeos_scripts %}{% endblock %}
+    </body>
+</html>
